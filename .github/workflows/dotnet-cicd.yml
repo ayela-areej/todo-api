@@ -47,6 +47,7 @@ jobs:
 
       - name: Push Docker image
         run: docker push ayela/todo-api:latest
+
   deploy-to-ec2:
     needs: build-and-test
     runs-on: ubuntu-latest
