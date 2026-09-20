@@ -32,3 +32,6 @@ jobs:
 
       - name: Run tests
         run: dotnet test tests/todo-api.Tests.csproj --no-build
+
+      - name: Publish application
+        run: dotnet publish todo-api.csproj -c Release -o publish --no-build
