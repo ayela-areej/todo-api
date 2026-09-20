@@ -18,11 +18,17 @@ jobs:
         with:
           dotnet-version: '9.0.x'
 
-      - name: Restore dependencies
-        run: dotnet restore
+      - name: Restore API
+        run: dotnet restore todo-api.csproj
+
+      - name: Restore tests
+        run: dotnet restore tests/todo-api.Tests.csproj
 
       - name: Build application
         run: dotnet build todo-api.csproj --no-restore
+
+      - name: Build tests
+        run: dotnet build tests/todo-api.Tests.csproj --no-restore
 
       - name: Run tests
         run: dotnet test tests/todo-api.Tests.csproj --no-build
