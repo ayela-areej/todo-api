@@ -47,3 +47,23 @@ jobs:
 
       - name: Push Docker image
         run: docker push ayela/todo-api:latest
+  deploy-to-ec2:
+    needs: build-and-test
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Deploy to EC2
+        uses: appleboy/ssh-action@v1.2.2
+        with:
+          host: ${{ secrets.EC2_HOST }}
+          username: ${{ secrets.EC2_USERNAME }}
+          key: ${{ secrets.EC2_SSH_KEY }}
+          script: |
+            docker pull ayela/todo-api:latest
+            docker stop todo-api || true
+            docker rm todo-api || true
+            docker run -d \
+              --name todo-api \
+              -p 80:8080 \
+              --restart unless-stopped \
+              ayela/todo-api:latest
