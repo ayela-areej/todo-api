@@ -2,7 +2,8 @@
 
 A REST API for managing to-do items, built with .NET 9 and ASP.NET Core.
 
-## Tech Stack
+## Tech Stack 
+#
 
 | Layer | Technology |
 |-------|-----------|
